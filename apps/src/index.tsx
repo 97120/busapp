@@ -4,8 +4,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { BusApp } from './components/BusApp';
-import { PassportApp } from './components/Passport';
+//import { PassportApp } from './components/Passport';
 import { Box, Button } from '@mui/material';
+import { PassportApp } from './components/Passport';
+import PassportProvider from './contexts/passportAppContext';
+
 
 const router = createBrowserRouter([
   {
@@ -18,14 +21,19 @@ const router = createBrowserRouter([
   },
   {
     path: "passport",
-    element:<PassportApp/>
-  }
+    element: (
+      <PassportProvider>
+        <PassportApp/>
+      </PassportProvider>
+    )
+  },
 ])
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-root.render(<RouterProvider router={router}/>);
+ root.render(<RouterProvider router={router}/>);
+ 
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
@@ -45,3 +53,5 @@ export function App() {
     </Box>
   )
 }
+
+ 
