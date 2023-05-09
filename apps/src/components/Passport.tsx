@@ -12,6 +12,7 @@ export const PassportApp = () => {
     const contextValue = useContext(PassportAppContext)
     const { updateData, ...data } = useContext(PassportAppContext)
     console.log(data)
+    const selectMonth = dayjs(data.bookingDate).month();
 
     const [number, setNumber] = useState(0);
     //console.log("Possport app render.")
@@ -22,25 +23,22 @@ export const PassportApp = () => {
     //     console.log("Inside useEffect.")
     // }, [number]);
 
-    //  useEffect(() => {
-    //     fetchAvailablity()
-    //     //console.log("Inside useEffect.")
-    //  }, [month]);
+    useEffect(() => {
+        
+            fetchAvailablity()
+        //console.log("Inside useEffect.")
+     }, [data]);
     
-    // //console.log("Outside use effect")
+    //console.log("Outside use effect")
 
-    // const fetchAvailablity = async () => {
-    //     //const url = "http://localhost:5000/availability/26?user=thanzaw";
-    //     //const url = `http://localhost:5000/availability?month=${month}`;
-    //     const url = `http://localhost:5000/availability?month=${month}`;
-    //     const response = await fetch(url);
-    //     const data = await response.json();
-    //     console.log(data)
-    // }
-    return (
-        <Box>
-            <PassportStepper/>
-       </Box>
-    )
+    const fetchAvailablity = async () => {
+        //const url = "http://localhost:5000/availability/26?user=thanzaw";
+        //const url = `http://localhost:5000/availability?month=${month}`;
+        const url = `http://localhost:5000/availability?month=${selectMonth}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("data from server..",data)
+    }
+    return <PassportStepper/>
 }
 

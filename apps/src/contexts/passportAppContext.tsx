@@ -18,7 +18,7 @@ interface Booking{
 
 const defaultContext = {
     bookingDate: null,
-    time: 15,
+    time: null,
     user: null,
     updateData: ()=>{},
 }

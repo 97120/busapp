@@ -33,8 +33,10 @@ app.use(cors());
 // })
 
 app.get("/availability", (request, response) => {
-    //@ts-ignore
-    const chooseMonth = parseInt(request.query.month, 10);
+    
+    const month = request.query.month as string
+    //const chooseMonth = parseInt(request.query.month, 10);
+    const chooseMonth = parseInt(month, 10);
     console.log(chooseMonth);
 
     const findAvailability = availability.filter((element) =>   element.month === chooseMonth );

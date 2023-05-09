@@ -10,30 +10,31 @@ const DateAndTime = () => {
     
     const [month,setMonth]=useState<number>( dayjs().month())
     const { updateData, ...data } = useContext(PassportAppContext)
+
     console.log(data)
+    //console.log(typeof dayjs().toDate())
     return (
         <>
              <Box
             sx={{ maxWidth: 300, margin: "0 auto", mt: 5 }}>
             <h1>Passport App</h1>
             
-
             <LocalizationProvider dateAdapter={AdapterDayjs} >
                 <DatePicker
                     format="DD-MM-YYYY"
                     disablePast
                     onChange={(value) => {
                         const dayJsObj = value as Dayjs
-                        setMonth(dayJsObj.month())
+                        // setMonth(dayJsObj.month())
                         updateData({
                             ...data,
-                            bookingDate: dayJsObj.format("DD-MM-YYYY")
+                            bookingDate: dayJsObj.toDate(),
                         })
                     }}
                 />
             </LocalizationProvider>
 
-             <h1>{ data.bookingDate}</h1>
+             {/* <h1>{ data.bookingDate}</h1> */}
 
 {/*             
              <Button variant="contained"
@@ -47,3 +48,4 @@ const DateAndTime = () => {
     )
 }
 export default DateAndTime;
+

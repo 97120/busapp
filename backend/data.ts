@@ -14,7 +14,7 @@ export interface Availability{
 
 export const availability: Availability[] = [
 {
-    date: "24-04-2023",
+    date: "27-04-2023",
     month: 3,
     slots: [
       { time: 9, totalSlot: 100, bookedSlot: 50, availableSlot: 50 },
@@ -25,7 +25,7 @@ export const availability: Availability[] = [
     ],
   },
   {
-    date: "25-04-2023",
+    date: "28-04-2023",
     month: 3,
     slots: [
       { time: 9, totalSlot: 100, bookedSlot: 50, availableSlot: 50 },
@@ -36,7 +36,7 @@ export const availability: Availability[] = [
     ],
   },
   {
-    date: "26-04-2023",
+    date: "29-4-2023",
     month: 3,
     slots: [
       { time: 9, totalSlot: 100, bookedSlot: 50, availableSlot: 50 },

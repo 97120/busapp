@@ -55,14 +55,14 @@ const PassportStepper = () => {
       </Stepper>
       
         <>
-        <Typography sx={{ mt: 5, mb: 4 }}>
+        <Box sx={{ mt: 5, mb: 20 }}>
           
           {activeStep ===0 && <DateAndTime/>}
           {activeStep === 1 && <UserInfo />}
           {activeStep === 2 && <ComfirmAndReview />}
 
           
-        </Typography>
+        </Box>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
@@ -74,13 +74,13 @@ const PassportStepper = () => {
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             
-            <Button onClick={handleNext}>
+            
             {activeStep === steps.length - 1 ? (
               <Button onClick={createBooking}>Finish</Button>) : (
                 <Button onClick={handleNext}>Next</Button>
               )
               }
-            </Button>
+            
           </Box>
         </>
      
