@@ -11,6 +11,7 @@ const UserInfo = () => {
           required
           id="name"
                 placeholder="Name"
+                value={data.user?.name? data.user.name:null}
                 onChange={(evt) =>
                     updateData({
                         ...data,
@@ -22,6 +23,7 @@ const UserInfo = () => {
           required
           id="nrc_number"
                 placeholder="NRC Number"
+                value={data.user?.nrcNumber? data.user.nrcNumber:null}
                 onChange={(evt) =>
                     updateData({
                         ...data,
@@ -32,6 +34,7 @@ const UserInfo = () => {
           required
           id="email"
                 placeholder="Email"
+                value={data.user?.email? data.user.email:null}
                 onChange={(evt) =>
                     updateData({
                         ...data,

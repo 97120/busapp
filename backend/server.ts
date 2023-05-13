@@ -33,6 +33,8 @@ app.use(cors());
 // })
 
 app.get("/availability", (request, response) => {
+    // console.log(request.query)
+    // response.send([])
     
     const month = request.query.month as string
     //const chooseMonth = parseInt(request.query.month, 10);
@@ -42,7 +44,7 @@ app.get("/availability", (request, response) => {
     const findAvailability = availability.filter((element) =>   element.month === chooseMonth );
     console.log(findAvailability);
     response.send(findAvailability)
-})
+}) 
 
 app.listen(port, () => {
     console.log(`Server is listening on port:${port}`);

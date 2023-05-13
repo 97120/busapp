@@ -18,9 +18,9 @@ const PassportStepper = () => {
   const {...data}=useContext(PassportAppContext)
   const [activeStep, setActiveStep] = React.useState(0);
 
-  useEffect(() => {
-     console.log(data)
-  },[activeStep])
+  // useEffect(() => {
+  //    console.log(data)
+  // },[activeStep])
   
   const createBooking = () => {
     // console.log(bookingDate);
@@ -76,7 +76,7 @@ const PassportStepper = () => {
             
             
             {activeStep === steps.length - 1 ? (
-              <Button onClick={createBooking}>Finish</Button>) : (
+              <Button onClick={()=>console.log(data)}>Finish</Button>) : (
                 <Button onClick={handleNext}>Next</Button>
               )
               }
