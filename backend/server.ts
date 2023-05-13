@@ -6,6 +6,7 @@ import { availability } from "./data";
 
 app.use(cors());
 
+app.use(express.json())
 // app.get("/availability", (request, response) => {
 //     const user = request.query;
 //     console.log(user)

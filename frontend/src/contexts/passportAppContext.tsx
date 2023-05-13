@@ -13,7 +13,7 @@ export interface Availability{
     slots:Slot[]
 }
 interface User {
-    name: string;
+    name: string ;
     nrcNumber: string;
     dateOfBirth: string
     phoneNumber: string;
@@ -27,7 +27,7 @@ interface Booking{
     user: User | null
     availability:Availability [],
     fetchAvailability:(value:any)=>void
-    updateData:(value:any)=>void
+    updateData:(value:any) => void
 }
 
 const defaultContext = {

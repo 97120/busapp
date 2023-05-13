@@ -6,6 +6,7 @@ import data from "../Utils/data"
 import { useContext, useEffect, useState } from "react"
 import { PassportAppContext } from "../contexts/passportAppContext"
 import { format } from "path"
+import { log } from "console"
 
 const DateAndTime = () => {
     
@@ -13,7 +14,8 @@ const DateAndTime = () => {
     // const { updateData, ...data } = useContext(PassportAppContext)
     //const {...data}=useContext(PassportAppContext)
     const contextData = useContext(PassportAppContext)
-    const {updateData,fetchAvailability,availability,...data}=contextData
+    const { updateData, fetchAvailability, availability, ...data } = useContext(PassportAppContext)
+    console.log(availability)
     // console.log(data)
     //console.log(typeof dayjs().toDate())
     const fetchAvailablity = async (month:number) => {
@@ -22,23 +24,24 @@ const DateAndTime = () => {
         const url = `http://localhost:5000/availability?month=${month}`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log("data from server..",data)
-    }
+        console.log("data from server..", data)
+        updateData({ ...contextData, availability: data })
     
-    const shouldDisableDate = (date: Dayjs) => {
-        const availabilityDate = availability.find(
-      (item) => item.date === date.format("DD-MM-YYYY")
-    );
-
-    if (!availabilityDate) {
-      return true;
     }
+    console.log(availability)
+    
+    const shouldDisableDate = (date:Dayjs) => {
+        if (!availability) return true;
+        //console.log(availability,date.format("DD-MM-YYYY"))
+        const availabilityDate = availability.find((item) => item.date === date.format("DD-MM-YYYY"))
+        
+        
+        if (!availabilityDate) return true;
 
-    const isAvailable = availabilityDate.slots.some(
-      (slot) => slot.availableSlot > 0
-    );
-
-    return isAvailable ? false : true;
+        const isAvailable = availabilityDate.slots.some((slot) => slot.availableSlot > 0)
+        
+        return isAvailable? false: true;
+        //return false;
     }
     
     return (
@@ -59,10 +62,10 @@ const DateAndTime = () => {
                         const dayJsObj = value as unknown as Dayjs
                         // setMonth(dayJsObj.month())
                         updateData({
-                            ...data,
+                            ...contextData,
                             bookingDate: dayJsObj.toDate(),
                         })
-                    }}
+                        }}
                 />
             </LocalizationProvider>
 
