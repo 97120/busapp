@@ -13,21 +13,24 @@ const DateAndTime = () => {
     // const [month,setMonth]=useState<number>( dayjs().month())
     // const { updateData, ...data } = useContext(PassportAppContext)
     //const {...data}=useContext(PassportAppContext)
-    const contextData = useContext(PassportAppContext)
-    const { updateData, fetchAvailability, availability, ...data } = useContext(PassportAppContext)
-    console.log(availability)
+    
+    //console.log(availability)
     // console.log(data)
     //console.log(typeof dayjs().toDate())
-    const fetchAvailablity = async (month:number) => {
-        //const url = "http://localhost:5000/availability/26?user=thanzaw";
-        //const url = `http://localhost:5000/availability?month=${month}`;
-        const url = `http://localhost:5000/availability?month=${month}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log("data from server..", data)
-        updateData({ ...contextData, availability: data })
+
+
+    // const fetchAvailablity = async (month:number) => {
+    //     //const url = "http://localhost:5000/availability/26?user=thanzaw";
+    //     //const url = `http://localhost:5000/availability?month=${month}`;
+    //     const url = `http://localhost:5000/availability?month=${month}`;
+    //     const response = await fetch(url);
+    //     const data = await response.json();
+    //     console.log("data from server..", data)
+    //     updateData({ ...updateData, availability: data })
     
-    }
+    // }
+
+    const { updateData, fetchAvailability, availability, ...data } = useContext(PassportAppContext)
     console.log(availability)
     
     const shouldDisableDate = (date:Dayjs) => {
@@ -56,13 +59,13 @@ const DateAndTime = () => {
                         disablePast
                         shouldDisableDate={shouldDisableDate}
                         value={data.bookingDate?dayjs(data.bookingDate):null}
-                        onOpen={()=>fetchAvailablity(dayjs().month())}
-                        onMonthChange={(date:Dayjs)=>fetchAvailablity(date.month())}
+                        onOpen={()=>fetchAvailability(dayjs().month())}
+                        onMonthChange={(date:Dayjs)=>fetchAvailability(date.month())}
                     onChange={(value) => {
                         const dayJsObj = value as unknown as Dayjs
                         // setMonth(dayJsObj.month())
                         updateData({
-                            ...contextData,
+                            ...data,
                             bookingDate: dayJsObj.toDate(),
                         })
                         }}
