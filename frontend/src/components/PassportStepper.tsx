@@ -10,24 +10,39 @@ import UserInfo from './UserInfo';
 import { log } from 'console';
 import { PassportAppContext } from '../contexts/passportAppContext';
 import ComfirmAndReview from './ComfirmAndReview';
+import dayjs from 'dayjs';
 
-const steps = ['Date & Time', 'User Info', 'Preview & Comfirm'];
+const steps = ['Date & Time', 'User Info', 'Preview & Confirm'];
 
 const PassportStepper = () => {
   //const {bookingDate,time,user}=useContext(PassportAppContext)
-  const {...data}=useContext(PassportAppContext)
+  //const {...data}=useContext(PassportAppContext)
+  const {bookingDate,time,user}=useContext(PassportAppContext)
+
   const [activeStep, setActiveStep] = React.useState(0);
 
   // useEffect(() => {
   //    console.log(data)
   // },[activeStep])
   
-  const createBooking = () => {
-    // console.log(bookingDate);
-    // console.log(time)
-    // console.log(user)
-    console.log("can create booking now..")
+  const createBooking = async() => {
+    const response = await fetch("http://localhost:5000/createBooking", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({
+        bookingDate: dayjs(bookingDate).format("DD-MM-YYYY"),
+        time,
+        user
+      })
+    })
+    const data = await response.json()
+    console.log(data)
   }
+
+
+  
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -55,7 +70,7 @@ const PassportStepper = () => {
       </Stepper>
       
         <>
-        <Box sx={{ mt: 5, mb: 20 }}>
+        <Box sx={{ mt: 5, mb: 5 }}>
           
           {activeStep ===0 && <DateAndTime/>}
           {activeStep === 1 && <UserInfo />}
@@ -76,7 +91,7 @@ const PassportStepper = () => {
             
             
             {activeStep === steps.length - 1 ? (
-              <Button onClick={()=>console.log(data)}>Finish</Button>) : (
+              <Button onClick={createBooking} >Confirm</Button>) : (
                 <Button onClick={handleNext}>Next</Button>
               )
               }
